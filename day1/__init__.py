@@ -1,4 +1,4 @@
-from day1.submarine import Submarine
+from submarine.submarine import Submarine
 from helper.filereader import Filereader
 
 
