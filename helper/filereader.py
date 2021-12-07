@@ -4,8 +4,14 @@ class Filereader:
         self.file = open(filename, "r")
         self._content = []
 
-    def readline(self):
-        return self.file.readline()
+    def readline(self, line):
+        return self.get_content()[line]
+
+    def readlines(self, start, stop):
+        return self.get_content()[start:stop]
+
+    def get_length(self):
+        return len(self.get_content())
 
     def get_content(self):
         if not self.file:

@@ -1,5 +1,6 @@
 import logging
 import math
+from copy import deepcopy
 
 import numpy as numpy
 
@@ -136,6 +137,9 @@ class Submarine:
                 else:
                     ones += 1
 
+            if exclude and len(exclusions) == report_length - 1:
+                return self._diff(self._diagnostic_report, exclusions)
+
             if invert:
                 if zeros > ones:
                     code.append(1)
@@ -148,6 +152,9 @@ class Submarine:
                     code.append(1)
 
         return code
+
+    def _diff(self, li1, li2):
+        return list(set(li1) - set(li2)) + list(set(li2) - set(li1))
 
     def _invert(self, arr):
         ret = []
