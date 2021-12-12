@@ -17,16 +17,28 @@ def task1(input):
     print(len(initial_state))
 
 
-# def task2(input):
-#     initial_state = list(map(int, content.split(',')))
-#
-#     days = 18
-#     fishes = len(initial_state)
-#     for counter in initial_state:
-#         new_fishes = (days - counter) % 6
+
+def calculate_fishes(days) -> int:
+    if days <= 0:
+        return 0
+    return 1 + calculate_fishes(days-7) + calculate_fishes(days-9)
+
+
+def task2(input):
+    initial_state = list(map(int, content.split(',')))
+
+    days = 256
+    fishes = len(initial_state)
+    for index, counter in enumerate(initial_state):
+        new_fishes = calculate_fishes(days-counter)
+        fishes += new_fishes
+        index += 1
+
+    print(fishes)
+
 
 if __name__ == '__main__':
     filereader = Filereader('test.txt')
     content = filereader.readline(0)
 
-    task1(content)
+    task2(content)
